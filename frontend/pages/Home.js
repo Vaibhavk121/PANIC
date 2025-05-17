@@ -8,11 +8,14 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native"; // Add this import
 import { Ionicons } from "@expo/vector-icons";
 import Card from "../components/Card";
 import theme from "../styles/theme";
 
 export default function Home() {
+  const navigation = useNavigation(); // Add this line
+  
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -34,7 +37,7 @@ export default function Home() {
         />
         <Text style={styles.locationText}>Bengaluru</Text>
         <Text style={styles.locationSubtext}>
-          Dayanand Sagar College of Engineering (DSCE)
+          Dayanand Sagar College(DSE)
         </Text>
       </View>
 
@@ -53,7 +56,11 @@ export default function Home() {
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.gridContainer}>
-          <TouchableOpacity style={styles.gridItem}>
+          
+          <TouchableOpacity 
+            style={styles.gridItem}
+            onPress={() => navigation.navigate('AIChatbot')}
+          >
             <Card style={styles.featureCard}>
               <View style={styles.iconContainer}>
                 <Ionicons
@@ -69,7 +76,10 @@ export default function Home() {
             </Card>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.gridItem}>
+          <TouchableOpacity 
+            style={styles.gridItem}
+            onPress={() => navigation.navigate('SignalZero')}
+          >
             <Card style={styles.featureCard}>
               <View style={styles.iconContainer}>
                 <Ionicons
@@ -85,7 +95,10 @@ export default function Home() {
             </Card>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.gridItem}>
+          <TouchableOpacity 
+            style={styles.gridItem}
+            onPress={() => navigation.navigate('OfflineGuide')}
+          >
             <Card style={styles.featureCard}>
               <View style={styles.iconContainer}>
                 <Ionicons
@@ -99,7 +112,10 @@ export default function Home() {
             </Card>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.gridItem}>
+          <TouchableOpacity 
+            style={styles.gridItem}
+            onPress={() => navigation.navigate('ResourceMap')}
+          >
             <Card style={styles.featureCard}>
               <View style={styles.iconContainer}>
                 <Ionicons

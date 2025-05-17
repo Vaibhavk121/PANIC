@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 // Base URL for API requests
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'http://192.168.141.207:5000/api';
 let authToken = '';
 let userId = '';
 let resourceId = '';
@@ -12,8 +12,8 @@ let lostFoundId = '';
 // Test user credentials
 const testUser = {
   name: 'Test User',
-  email: 'test@example.com',
-  password: 'password123',
+  email: 'vaibhav@example.com',
+  password: 'vaibhav',
   phone: '1234567890'
 };
 
