@@ -1,0 +1,14 @@
+Theme : Defence and disaster
+The idea is PANIC(Personalised AI Navigator In Crises)
+So its a Mobile app which will help u in tough situation like natural disasters where u wont be having Limited resources and almost zero hopes.
+The Features of the apps are
+1. Resource Map: Which helps u navigate through resources when needed the most and people can also list there resources on volunteerly basis.
+2. Offline Survival Guide : Which will store offline data About tough situations and how to handle that.
+3. Bluetooth Mesh Connectivity which helps u connect with people even when No network is there with the help of Bluetooth.
+4. Community Page : Where people can list about Lost and Found people during a disaster in the app.
+5. User Emergency Profile : Which will be having all the details of the user(like any diseas , medicacion or allergy) which could be accessed by any helper if the user is unconcious.
+6. SOS button : For sending the last location to local authorities or Family members.
+
+Tech Stack using 
+React Native with Expo for Frontend 
+Python Flask for Backend
