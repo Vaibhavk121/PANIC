@@ -144,12 +144,17 @@ export default function Home() {
                   Issued by Central Government
                 </Text>
               </View>
-              <View style={[styles.intensityContainer, {
-                backgroundColor: theme.light.colors.card,
-                paddingHorizontal: 12,
-                paddingVertical: 6,
-                borderRadius: 9999
-              }]}>
+              <View
+                style={[
+                  styles.intensityContainer,
+                  {
+                    backgroundColor: theme.light.colors.card,
+                    paddingHorizontal: 12,
+                    paddingVertical: 6,
+                    borderRadius: 9999,
+                  },
+                ]}
+              >
                 <Text
                   style={[
                     styles.alertIntensity,
@@ -275,12 +280,17 @@ export default function Home() {
                   Issued by Karnataka Government
                 </Text>
               </View>
-              <View style={[styles.intensityContainer, {
-                backgroundColor: theme.light.colors.card,
-                paddingHorizontal: 12,
-                paddingVertical: 6,
-                borderRadius: 9999
-              }]}>
+              <View
+                style={[
+                  styles.intensityContainer,
+                  {
+                    backgroundColor: theme.light.colors.card,
+                    paddingHorizontal: 12,
+                    paddingVertical: 6,
+                    borderRadius: 9999,
+                  },
+                ]}
+              >
                 <Text
                   style={[
                     styles.alertIntensity,
@@ -406,12 +416,17 @@ export default function Home() {
                   Issued by Karnataka Government
                 </Text>
               </View>
-              <View style={[styles.intensityContainer, {
-                backgroundColor: theme.light.colors.card,
-                paddingHorizontal: 12,
-                paddingVertical: 6,
-                borderRadius: 9999
-              }]}>
+              <View
+                style={[
+                  styles.intensityContainer,
+                  {
+                    backgroundColor: theme.light.colors.card,
+                    paddingHorizontal: 12,
+                    paddingVertical: 6,
+                    borderRadius: 9999,
+                  },
+                ]}
+              >
                 <Text
                   style={[
                     styles.alertIntensity,
@@ -648,16 +663,16 @@ const styles = StyleSheet.create({
     opacity: 0.8,
   },
   alertActions: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginTop: 12,
     paddingTop: 12,
     borderTopWidth: 1,
     borderTopColor: theme.light.colors.border,
   },
   actionButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 4,
   },
   actionText: {
