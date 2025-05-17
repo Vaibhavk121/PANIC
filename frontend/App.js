@@ -5,13 +5,15 @@ import SignIn from "./pages/SignIn";
 import theme from "./styles/theme";
 import SignUp from "./pages/Signup";
 import SignalZeroChat from "./pages/SignalZeroChat";
+import SOS from "./pages/SOS";
+import AIChatbot from "./pages/AIChatbot";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
+      {/* <Stack.Navigator
         screenOptions={{
           headerShown: false,
           contentStyle: {
@@ -23,7 +25,8 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="SignalZeroChat" component={SignalZeroChat} />
       </Stack.Navigator>
-      <StatusBar style="auto" />
+      <StatusBar style="auto" /> */}
+      <AIChatbot />
     </NavigationContainer>
   );
 }
