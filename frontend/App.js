@@ -17,14 +17,6 @@ export default function App() {
           contentStyle: {
             backgroundColor: theme.light.colors.background,
           },
-          // Hide the navigation bar
-          navigationBarHidden: true,
-          // Hide the bottom tabs
-          tabBarStyle: { display: "none" },
-          // Hide the gesture navigation bar on Android
-          animation: "none",
-          // Hide the home indicator on iOS
-          safeAreaInsets: { bottom: 0 },
         }}
       >
         <Stack.Screen name="SignIn" component={SignIn} />
