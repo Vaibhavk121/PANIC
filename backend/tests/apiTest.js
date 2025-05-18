@@ -12,8 +12,8 @@ let lostFoundId = '';
 // Test user credentials
 const testUser = {
   name: 'Test User',
-  email: 'vaibhav@example.com',
-  password: 'vaibhav',
+  email: 'deepu@gmail.com',
+  password: 'password',
   phone: '1234567890'
 };
 
@@ -317,11 +317,14 @@ const runTests = async () => {
     }
 
     console.log('\n🏁 API tests completed!');
+    console.log(Authorization);
     
   } catch (error) {
     console.error('Error running tests:', error);
   }
 };
+
+
 
 // Run the tests
 runTests();
