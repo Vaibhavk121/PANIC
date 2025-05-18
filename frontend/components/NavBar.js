@@ -1,7 +1,31 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  Platform,
+  SafeAreaView,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import theme from "../styles/theme";
+import Community from "../pages/Community";
+
+// Icons
+const icons = {
+  home: {
+    active: require("../assets/icons/home-blue.png"),
+    inactive: require("../assets/icons/home.png"),
+  },
+  community: {
+    active: require("../assets/icons/community-blue.png"),
+    inactive: require("../assets/icons/community.png"),
+  },
+  profile: {
+    active: require("../assets/icons/profile-blue.png"),
+    inactive: require("../assets/icons/profile.png"),
+  },
+};
 
 export default function NavBar() {
   const navigation = useNavigation();
@@ -9,77 +33,63 @@ export default function NavBar() {
 
   const handleTabPress = (tabName) => {
     setActiveTab(tabName);
-    // Navigate to the corresponding screen
-    navigation.navigate(tabName.charAt(0).toUpperCase() + tabName.slice(1));
+    switch (tabName) {
+      case "home":
+        navigation.navigate("Home"); // Navigates to Home.js
+        break;
+      case "community":
+        navigation.navigate("Community"); // Navigates to Community.js
+        break;
+      case "profile":
+        navigation.navigate("SmartProfile"); // Navigates to SmartProfile.js
+        break;
+      default:
+        break;
+    }
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.navbar}>
-        <TouchableOpacity
-          style={styles.tabItem}
-          onPress={() => handleTabPress("home")}
-        >
-          <Text
-            style={[
-              styles.iconText,
-              activeTab === "home" ? styles.activeIconText : {},
-            ]}
+        {["home", "community", "profile"].map((tab) => (
+          <TouchableOpacity
+            key={tab}
+            style={styles.tabItem}
+            onPress={() => handleTabPress(tab)}
           >
-            ⌂
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.tabItem}
-          onPress={() => handleTabPress("community")}
-        >
-          <Text
-            style={[
-              styles.iconText,
-              activeTab === "community" ? styles.activeIconText : {},
-            ]}
-          >
-            👥
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.tabItem}
-          onPress={() => handleTabPress("profile")}
-        >
-          <Text
-            style={[
-              styles.iconText,
-              activeTab === "profile" ? styles.activeIconText : {},
-            ]}
-          >
-            ○
-          </Text>
-        </TouchableOpacity>
+            <Image
+              source={
+                activeTab === tab ? icons[tab].active : icons[tab].inactive
+              }
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+        ))}
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    bottom: 20,
+    bottom: 0,
     left: 0,
     right: 0,
-    alignItems: "center",
+    zIndex: 100,
+    backgroundColor: "transparent",
   },
   navbar: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "center",
     backgroundColor: theme.light.colors.background,
-    borderRadius: 30,
-    paddingVertical: 12,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingVertical: 16,
     paddingHorizontal: 40,
-    width: "90%",
-    borderWidth: 1,
+    width: "100%",
+    borderTopWidth: 1,
     borderColor: theme.light.colors.border,
     ...theme.light.shadow.sm,
   },
@@ -88,11 +98,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 10,
   },
-  iconText: {
-    fontSize: 24,
-    color: theme.light.colors.mutedForeground,
-  },
-  activeIconText: {
-    color: theme.light.colors.primary,
+  icon: {
+    width: 24,
+    height: 24,
+    resizeMode: "contain",
   },
 });
