@@ -8,11 +8,20 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native"; // Add this import
 import { Ionicons } from "@expo/vector-icons";
 import Card from "../components/Card";
 import theme from "../styles/theme";
+import NavBar from "../components/NavBar";
+import SOS from "../pages/SOS"
 
 export default function Home() {
+  const navigation = useNavigation(); // Add this line
+
+  const handleSOSPress = () => {
+    navigation.navigate('SOS');
+  };
+  
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -34,7 +43,7 @@ export default function Home() {
         />
         <Text style={styles.locationText}>Bengaluru</Text>
         <Text style={styles.locationSubtext}>
-          Dayanand Sagar College of Engineering (DSCE)
+          Dayanand Sagar College(DSE)
         </Text>
       </View>
 
@@ -53,23 +62,13 @@ export default function Home() {
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.gridContainer}>
-          <TouchableOpacity style={styles.gridItem}>
-            <Card style={styles.featureCard}>
-              <View style={styles.iconContainer}>
-                <Ionicons
-                  name="chatbubble-ellipses-outline"
-                  size={24}
-                  color={theme.light.colors.primary}
-                />
-              </View>
-              <Text style={styles.featureTitle}>Crisis Voice</Text>
-              <Text style={styles.featureSubtitle}>
-                Report incidents and get help
-              </Text>
-            </Card>
-          </TouchableOpacity>
+          
+          
 
-          <TouchableOpacity style={styles.gridItem}>
+          <TouchableOpacity 
+            style={styles.gridItem}
+            onPress={() => navigation.navigate('SignalZero')}
+          >
             <Card style={styles.featureCard}>
               <View style={styles.iconContainer}>
                 <Ionicons
@@ -85,7 +84,29 @@ export default function Home() {
             </Card>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.gridItem}>
+          <TouchableOpacity 
+            style={styles.gridItem}
+            onPress={() => navigation.navigate('AIChatbot')}
+          >
+            <Card style={styles.featureCard}>
+              <View style={styles.iconContainer}>
+                <Ionicons
+                  name="chatbubble-ellipses-outline"
+                  size={24}
+                  color={theme.light.colors.primary}
+                />
+              </View>
+              <Text style={styles.featureTitle}>Crisis Voice</Text>
+              <Text style={styles.featureSubtitle}>
+                Report incidents and get help
+              </Text>
+            </Card>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={styles.gridItem}
+            onPress={() => navigation.navigate('OfflineGuide')}
+          >
             <Card style={styles.featureCard}>
               <View style={styles.iconContainer}>
                 <Ionicons
@@ -99,7 +120,10 @@ export default function Home() {
             </Card>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.gridItem}>
+          <TouchableOpacity 
+            style={styles.gridItem}
+            onPress={() => navigation.navigate('ResourceMap')}
+          >
             <Card style={styles.featureCard}>
               <View style={styles.iconContainer}>
                 <Ionicons
@@ -526,11 +550,43 @@ export default function Home() {
           </Card>
         </View>
       </ScrollView>
+      <TouchableOpacity 
+        style={styles.sosButton}
+        onPress={handleSOSPress}
+      >
+        <Text style={styles.sosButtonText}>SOS</Text>
+      </TouchableOpacity>
+      <NavBar />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  sosButton: {
+    position: 'absolute',
+    bottom: 100,
+    right: 20,
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: theme.light.colors.destructive,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    zIndex: 100,
+  },
+  sosButtonText: {
+    color: theme.light.colors.destructiveForeground,
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
   container: {
     flex: 1,
     backgroundColor: theme.light.colors.background,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import theme from '../styles/theme';
@@ -9,19 +9,92 @@ import ArrowLeft from '../assets/icons/ArrowLeft.png';
 export default function SignalZeroChat() {
   const navigation = useNavigation();
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState([
-    { id: 1, text: 'Hey! I need help!', sender: 'other', time: '09:41' },
-    { id: 2, text: "I'm nearby. What's wrong?", sender: 'me', time: '09:41' },
-  ]);
+  const [messages, setMessages] = useState([]);
+  const [deviceId, setDeviceId] = useState(`device_${Math.random().toString(36).substring(2, 9)}`); // Generate unique device ID
+  const scrollViewRef = useRef(null);
+
+  const ws = useRef(null);
+
+  const connectWebSocket = () => {
+    ws.current = new WebSocket('ws://192.168.141.207:5000');
+    
+    ws.current.onopen = () => {
+      console.log('Connected to WebSocket server');
+      // Send a join message to identify this device
+      const joinMessage = {
+        type: 'join',
+        deviceId: deviceId,
+        time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+      };
+      ws.current.send(JSON.stringify(joinMessage));
+    };
+    
+    ws.current.onmessage = (event) => {
+      try {
+        if (typeof event.data === 'string' && (event.data.startsWith('{') || event.data.startsWith('['))) {
+          const newMessage = JSON.parse(event.data);
+          console.log("Received message:", newMessage); // Add this for debugging
+          
+          // Add to messages without filtering by deviceId
+          setMessages((prevMessages) => [...prevMessages, {
+            ...newMessage,
+            sender: newMessage.deviceId === deviceId ? 'me' : 'other'
+          }]);
+        } else {
+          console.log('Received non-JSON message:', event.data);
+        }
+      } catch (error) {
+        console.error('Error parsing message:', error);
+      }
+    };
+    
+    ws.current.onclose = () => {
+      console.log('Disconnected from WebSocket server');
+      // Attempt to reconnect after a delay
+      setTimeout(connectWebSocket, 3000);
+    };
+    
+    ws.current.onerror = (error) => {
+      console.error('WebSocket error:', error);
+      ws.current.close();
+    };
+  };
+
+  useEffect(() => {
+    connectWebSocket();
+    
+    return () => {
+      if (ws.current) {
+        ws.current.close();
+      }
+    };
+  }, []);
+
+  // Auto-scroll to bottom when messages change
+  useEffect(() => {
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollToEnd({ animated: true });
+    }
+  }, [messages]);
 
   const sendMessage = () => {
     if (message.trim()) {
-      setMessages([...messages, {
-        id: messages.length + 1,
+      const newMessage = {
+        id: Date.now() + Math.random(), // Use timestamp + random for more unique IDs
         text: message,
+        type: 'chat',
         sender: 'me',
+        deviceId: deviceId, // Add device identifier
         time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
-      }]);
+      };
+      
+      // Send to server first
+      if (ws.current && ws.current.readyState === WebSocket.OPEN) {
+        ws.current.send(JSON.stringify(newMessage));
+      } else {
+        console.error('WebSocket is not connected');
+      }
+      
       setMessage('');
     }
   };
@@ -32,20 +105,29 @@ export default function SignalZeroChat() {
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
           <Image source={ArrowLeft} style={styles.headerIcon} />
         </TouchableOpacity>
-        <Text style={styles.headerText}>Signal-Zero Chat</Text>
+        <Text style={styles.headerText}>Community Chat</Text>
       </View>
 
       <View style={styles.connectionInfo}>
-        <Text style={styles.title}>Connected to Vaibhav</Text>
-        <Text style={styles.subtitle}>You can now communicate with Vaibhav</Text>
+        <Text style={styles.title}>Connected to Community</Text>
+        <Text style={styles.subtitle}>Device ID: {deviceId.substring(0, 8)}</Text>
       </View>
 
-      <ScrollView style={styles.chatArea} contentContainerStyle={styles.chatContent}>
+      <ScrollView 
+        ref={scrollViewRef}
+        style={styles.chatArea} 
+        contentContainerStyle={styles.chatContent}
+      >
         {messages.map((msg) => (
           <View 
-            key={msg.id} 
+            key={msg.id} // Make sure this ID is truly unique
             style={[styles.message, msg.sender === 'me' ? styles.sentMessage : styles.receivedMessage]}
           >
+            {msg.sender !== 'me' && (
+              <Text style={styles.senderName}>
+                {msg.deviceId ? msg.deviceId.substring(0, 8) : 'Unknown'}
+              </Text>
+            )}
             <Text style={[styles.messageText, msg.sender === 'me' && styles.sentMessageText]}>
               {msg.text}
             </Text>

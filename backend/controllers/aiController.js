@@ -84,7 +84,8 @@ ${locationContext}
 
 User Question: ${question}
 
-Please provide helpful, accurate information related to disaster preparedness, response, or recovery. 
+Please provide a concise, clear, and well-formatted answer (preferably in bullet points or short paragraphs). 
+Limit your response to the most important information. 
 If the question is about immediate danger, emphasize safety first and recommend contacting emergency services.
 If you don't know specific local information, be honest about your limitations.
 `;
@@ -132,7 +133,13 @@ If you don't know specific local information, be honest about your limitations.
     }
     
     const response = result.response;
-    const aiResponse = response.text();
+    // Try to get markdown or bullet points if available, else fallback to plain text
+    let aiResponse = response.text();
+
+    // Optionally, trim long responses (e.g., max 1200 chars)
+    if (aiResponse.length > 1200) {
+      aiResponse = aiResponse.slice(0, 1200) + '\n\n...response truncated for brevity.';
+    }
 
     res.json({ 
       prompt: promptText.trim(),

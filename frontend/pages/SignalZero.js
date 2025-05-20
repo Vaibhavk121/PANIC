@@ -88,9 +88,9 @@ export default function SignalZero() {
             onPress={() => navigation.navigate('SignalZeroChat')}
           >
             <View style={styles.userAvatar}>
-              <Text style={styles.userInitial}>V</Text>
+              <Text style={styles.userInitial}>A</Text>
             </View>
-            <Text style={styles.userName}>Vaibhav</Text>
+            <Text style={styles.userName}>Anonamous</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -174,8 +174,8 @@ const styles = StyleSheet.create({
   dummyUser: {
     position: 'absolute',
     alignItems: 'center',
-    top: '40%',
-    right: '30%',
+    top: '30%',
+    right: '20%',
   },
   userAvatar: {
     width: 40,

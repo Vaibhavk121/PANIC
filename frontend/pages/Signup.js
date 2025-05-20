@@ -36,7 +36,8 @@ export default function SignUp() {
 
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:3000/api/auth/signup', {
+      // Ensure this IP is correct for your setup (10.0.2.2 for Android Emulator)
+      const response = await fetch('http://192.168.141.207:5000/api/auth/register', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -45,6 +46,8 @@ export default function SignUp() {
         body: JSON.stringify({
           email: email.trim(),
           password: password,
+          name: email.split('@')[0], // Using email username as name
+          phone: '' // Required by backend but not collected in UI yet
         }),
       });
 
@@ -53,10 +56,14 @@ export default function SignUp() {
       if (response.ok) {
         navigation.navigate('Home');
       } else {
-        Alert.alert('Error', data.message || 'Signup failed');
+        Alert.alert('Sign Up Failed', data.message || 'An unknown error occurred during sign up.');
       }
     } catch (error) {
-      Alert.alert('Error', 'Network error. Please try again.');
+      console.error("Signup Network Error:", error); // Log the full error
+      Alert.alert(
+        'Connection Error',
+        'Unable to connect to the server. Please check your internet connection, ensure the server is running, and try again. Details: ' + error.message
+      );
     } finally {
       setIsLoading(false);
     }

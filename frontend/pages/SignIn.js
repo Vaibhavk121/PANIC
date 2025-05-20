@@ -11,7 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import Button from "../components/Button";
 import theme from "../styles/theme";
 
-export default function SignUp() {
+export default function SignIn() {  // Changed from SignUp to SignIn
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,12 +33,13 @@ export default function SignUp() {
     return true;
   };
 
-  const handleSignUp = async () => {
+  const handleSignIn = async () => {  // Changed from handleSignUp to handleSignIn
     if (!validateForm()) return;
 
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:3000/api/auth/signup", {
+      // Use 10.0.2.2 for Android emulator or your computer's IP address
+      const response = await fetch("http://192.168.141.207:5000/api/auth/login", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -53,18 +54,19 @@ export default function SignUp() {
       const data = await response.json();
 
       if (response.ok) {
+        // Store the token
+        // TODO: Implement secure token storage
         navigation.navigate("Home");
       } else {
-        const errorMessage =
-          data.error || data.message || "An error occurred during signup";
-        console.error("Signup Error:", errorMessage);
-        Alert.alert("Signup Failed", errorMessage);
+        const errorMessage = data.error || data.message || "An error occurred during signin";
+        console.error("Signin Error:", errorMessage);
+        Alert.alert("Signin Failed", errorMessage);
       }
     } catch (error) {
       console.error("Network Error:", error);
       Alert.alert(
         "Connection Error",
-        "Unable to connect to the server. Please check your internet connection and try again."
+        "Unable to connect to the server. Please check if the backend server is running and try again."
       );
     } finally {
       setIsLoading(false);
@@ -116,7 +118,7 @@ export default function SignUp() {
 
       <Button
         title={isLoading ? "Loading..." : "Login"}
-        onPress={handleSignUp}
+        onPress={handleSignIn}  // Changed from handleSignUp to handleSignIn
         style={styles.loginButton}
         disabled={isLoading}
       />

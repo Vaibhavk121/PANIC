@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import theme from "../styles/theme";
+import Community from "../pages/Community";
 
 // Icons
 const icons = {
@@ -32,7 +33,19 @@ export default function NavBar() {
 
   const handleTabPress = (tabName) => {
     setActiveTab(tabName);
-    navigation.navigate(tabName.charAt(0).toUpperCase() + tabName.slice(1));
+    switch (tabName) {
+      case "home":
+        navigation.navigate("Home"); // Navigates to Home.js
+        break;
+      case "community":
+        navigation.navigate("Community"); // Navigates to Community.js
+        break;
+      case "profile":
+        navigation.navigate("SmartProfile"); // Navigates to SmartProfile.js
+        break;
+      default:
+        break;
+    }
   };
 
   return (
