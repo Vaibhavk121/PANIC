@@ -1,5 +1,6 @@
 
-<h1 align="center">PANIC Disaster Support & Emergency System</h1>
+<h1 align="center">PANIC : Disaster Support & Emergency System</h1>
+<h2 align="center">Personalised Ai Navigator In Crisis</h2>
 
 <p align="center">
   <b>Empowering communities with real-time disaster response, resource sharing, and emergency communication.</b>
@@ -63,7 +64,7 @@ PANIC-DSE/
 ## 🧩 Tech Stack
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=react,nodejs,express,mongodb,js,ts,ws,axios" height="32" /><img src ="https://images.seeklogo.com/logo-png/45/1/expo-go-app-logo-png_seeklogo-457073.png" height="32"/>
+  <img src="https://skillicons.dev/icons?i=react,nodejs,express,mongodb,js,ts" height="32" style="border-radius:8px;" /> <img src="https://images.seeklogo.com/logo-png/45/1/expo-go-app-logo-png_seeklogo-457073.png" height="32" style="border-radius:8px;" />
 </p>
 
 - **Frontend**: React Native, Expo, Styled Components, Axios
@@ -171,7 +172,7 @@ PANIC-DSE/
 ```bash
 cd backend
 npm install
-cp .env.example .env   # Add your MongoDB URI, JWT_SECRET, GEMINI_API_KEY
+cp .env.example .env  
 npm start
 ```
 
