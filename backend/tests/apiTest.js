@@ -12,10 +12,10 @@ let lostFoundId = '';
 // Test user credentials
 const testUser = {
   name: 'Test User',
-  email: 'deepu@gmail.com',
-  password: 'password',
+  email: 'deepshikha@gmail.com',
+  password: 'password123',
   phone: '1234567890'
-};
+};s
 
 // Test resource data
 const testResource = {

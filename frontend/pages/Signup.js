@@ -37,7 +37,7 @@ export default function SignUp() {
     setIsLoading(true);
     try {
       // Ensure this IP is correct for your setup (10.0.2.2 for Android Emulator)
-      const response = await fetch('http://192.168.141.207:5000/api/auth/register', {
+      const response = await fetch('http://10.146.49.207:5000/api/auth/register', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

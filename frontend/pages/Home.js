@@ -79,7 +79,7 @@ export default function Home() {
               </View>
               <Text style={styles.featureTitle}>Signal Zero</Text>
               <Text style={styles.featureSubtitle}>
-                Track real-time threats
+                Offline Bluetooth communication
               </Text>
             </Card>
           </TouchableOpacity>
@@ -115,8 +115,8 @@ export default function Home() {
                   color={theme.light.colors.primary}
                 />
               </View>
-              <Text style={styles.featureTitle}>Offline Guidelines</Text>
-              <Text style={styles.featureSubtitle}>Access safety guides</Text>
+              <Text style={styles.featureTitle}>Offline Guide</Text>
+              <Text style={styles.featureSubtitle}>Saving guides that work without internet</Text>
             </Card>
           </TouchableOpacity>
 
@@ -133,7 +133,7 @@ export default function Home() {
                 />
               </View>
               <Text style={styles.featureTitle}>Find Help</Text>
-              <Text style={styles.featureSubtitle}>Connect with resources</Text>
+              <Text style={styles.featureSubtitle}>Map Showing Nearby Shelter and Aid</Text>
             </Card>
           </TouchableOpacity>
         </View>

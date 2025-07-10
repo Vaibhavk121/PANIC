@@ -39,7 +39,7 @@ export default function SignIn() {  // Changed from SignUp to SignIn
     setIsLoading(true);
     try {
       // Use 10.0.2.2 for Android emulator or your computer's IP address
-      const response = await fetch("http://192.168.141.207:5000/api/auth/login", {
+      const response = await fetch("http://10.146.49.207:5000/api/auth/login", {
         method: "POST",
         headers: {
           Accept: "application/json",
