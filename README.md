@@ -64,7 +64,7 @@ PANIC-DSE/
 ## 🧩 Tech Stack
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=react,nodejs,express,mongodb,js,ts" height="32" style="border-radius:8px;" /> <img src="https://images.seeklogo.com/logo-png/45/1/expo-go-app-logo-png_seeklogo-457073.png" height="32" style="border-radius:8px;" />
+  <img src="https://skillicons.dev/icons?i=react,nodejs,express,mongodb,js,ts" " /> 
 </p>
 
 - **Frontend**: React Native, Expo, Styled Components, Axios
